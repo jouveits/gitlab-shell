@@ -1,0 +1,9 @@
+{
+  "name": "Access Control",
+  "description": "(System) Access control to GitLab repository",
+  "type": "pre-receive", 
+  "enable_default": true,
+  "locked": true,
+  "version": "1.0.0"
+}
+

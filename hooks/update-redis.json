@@ -1,0 +1,8 @@
+{
+  "name": "Update Redis GitLab",
+  "description": "(System) Update changes in GitLab Redis key store",
+  "type": "post-receive",
+  "enable_default": true,
+  "locked": true,
+  "version": "1.0.0"
+}
