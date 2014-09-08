@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'timeout'
+require 'json'
 
 require_relative 'gitlab_config'
 require_relative 'gitlab_logger'
@@ -18,9 +19,43 @@ class GitlabProjects
   attr_reader :full_path
 
   def self.create_hooks(path)
+    # Add default hook wrapper (update)
     hook = File.join(path, 'hooks', 'update')
     File.delete(hook) if File.exists?(hook)
-    File.symlink(File.join(ROOT_PATH, 'hooks', 'update'), hook)
+    File.symlink(File.join(ROOT_PATH, 'hooks', 'hook-wrapper'), hook)
+
+    # Add default gitlab update hook (authorization hook)
+    hook = File.join(path, 'hooks', 'update-gitlab')
+    File.delete(hook) if File.exists?(hook)
+    File.symlink(File.join(ROOT_PATH, 'hooks', 'update-gitlab'), hook)
+
+    $logger.info "Starting import hooks ..."
+
+    # Default enable all hooks with a json file
+    Dir.glob(File.join(ROOT_PATH, 'hooks', '*.json')) do |githook_info|
+      $logger.info "Reading json files ..."
+
+      hook_conf = JSON.parse(IO.read(githook_info))
+      hook_conf['id'] = File.basename(githook_info, '.json')
+
+      # Enable default option set to true
+      if hook_conf['enable_default']
+         # Add hook wrapper script
+         type_hook = File.join(path, 'hooks', "#{hook_conf['type']}")
+         hook_wrapper = File.join(ROOT_PATH, 'hooks', 'hook-wrapper')
+         File.symlink(hook_wrapper, type_hook) if not File.exists?(type_hook)
+         
+         # Add the hook script
+         hook = File.join(path, 'hooks', "#{hook_conf['type']}-#{hook_conf['id']}")
+         File.delete(hook) if File.exists?(hook)
+         File.symlink(File.join(ROOT_PATH, 'hooks', name), hook)
+
+         $logger.info "Hook symlink created ! (#{hook_conf['type']}-#{hook_conf['id']})"
+      else
+         $logger.info "Hook #{hook_conf['id']} not enable by default"
+      end
+    end
+
   end
 
   def initialize
