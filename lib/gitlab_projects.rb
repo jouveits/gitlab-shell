@@ -20,14 +20,14 @@ class GitlabProjects
 
   def self.create_hooks(path)
     # Add default hook wrapper (update)
-    hook = File.join(path, 'hooks', 'update')
-    File.delete(hook) if File.exists?(hook)
-    File.symlink(File.join(ROOT_PATH, 'hooks', 'hook-wrapper'), hook)
+    #hook = File.join(path, 'hooks', 'update')
+    #File.delete(hook) if File.exists?(hook)
+    #File.symlink(File.join(ROOT_PATH, 'hooks', 'hook-wrapper'), hook)
 
     # Add default gitlab update hook (authorization hook)
-    hook = File.join(path, 'hooks', 'update-gitlab')
-    File.delete(hook) if File.exists?(hook)
-    File.symlink(File.join(ROOT_PATH, 'hooks', 'update-gitlab'), hook)
+    #hook = File.join(path, 'hooks', 'update-gitlab')
+    #File.delete(hook) if File.exists?(hook)
+    #File.symlink(File.join(ROOT_PATH, 'hooks', 'update-gitlab'), hook)
 
     $logger.info "Starting import hooks ..."
 
@@ -48,7 +48,7 @@ class GitlabProjects
          # Add the hook script
          hook = File.join(path, 'hooks', "#{hook_conf['type']}-#{hook_conf['id']}")
          File.delete(hook) if File.exists?(hook)
-         File.symlink(File.join(ROOT_PATH, 'hooks', name), hook)
+         File.symlink(File.join(ROOT_PATH, 'hooks', "#{hook_conf['id']}"), hook)
 
          $logger.info "Hook symlink created ! (#{hook_conf['type']}-#{hook_conf['id']})"
       else
