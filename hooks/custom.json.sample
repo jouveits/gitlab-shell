@@ -1,0 +1,9 @@
+{
+  "name": "Custom title name",
+  "description": "Description of custom hook",
+  "type": "update", # eg: update, post-commit, pre-commit, ...
+  "enable_default": true, # active hook at the creation of repository
+  "locked": true, # cannot be disable by users
+  "version": "1.0.0"
+}
+
