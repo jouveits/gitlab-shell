@@ -7,16 +7,21 @@
 # http://osdir.com/ml/git/2009-01/msg00308.html
 
 data=$(cat)
+args=$*
 exitcodes=()
 hookname=`basename $0`
 
 # Run each hook, passing through STDIN and storing the exit code.
 # We don't want to bail at the first failure, as the user might
 # then bypass the hooks without knowing about additional issues.
-
+echo "hook: $hookname ..."
 for hook in $GIT_DIR/hooks/$hookname-*; do
   test -x "$hook" || continue
-  echo "$data" | "$hook"
+  if [ -z "${data}" ]; then
+    $hook $args
+  else
+    echo "$data" | "$hook"
+  fi
   exitcodes+=($?)
 done
 

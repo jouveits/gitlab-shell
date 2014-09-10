@@ -1,0 +1,8 @@
+{
+  "name": "Access Control / Update Redis",
+  "description": "(System) Check access in GitLab and update redis",
+  "type": "update",
+  "enable_default": true,
+  "locked": false,
+  "version": "1.0.0"
+}
