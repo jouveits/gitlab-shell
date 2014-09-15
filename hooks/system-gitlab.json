@@ -3,6 +3,6 @@
   "description": "(System) Check access in GitLab and update redis",
   "type": "update",
   "enable_default": true,
-  "locked": false,
+  "locked": true,
   "version": "1.0.0"
 }
