@@ -3,7 +3,7 @@
 result=0
 TIMEPOINT=$(date +"%Y%m%d %H:%m:%S")
 LOG_FILE="/home/git/gitlab/log/mantis_integration.log"
-MANTIS_URL="http://mantis.vm-esproj-int2"
+MANTIS_URL="http://mantis-si.jouve.local"
 MANTIS_GIT_ENDPOINT="checkin_git_post.php"
 CURL="/usr/bin/curl"
 
