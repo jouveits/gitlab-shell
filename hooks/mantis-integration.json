@@ -1,0 +1,8 @@
+{
+  "name": "MANTIS integration",
+  "description": "Sends commit message to Mantis in order to update bug",
+  "type": "post-receive",
+  "enable_default": true,
+  "locked": false,
+  "version": "0.0.1"
+}
