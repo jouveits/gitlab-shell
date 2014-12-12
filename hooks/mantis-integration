@@ -29,7 +29,7 @@ do
     committer=`git log --format=%cn -1 $commit`
 
     #Calling mantis
-    $($CURL --silent --data-urlencode "commit=$commit" --data-urlencode "message=$message" --data-urlencode "committer=$committer" --data-urlencode "dir=$GIT_DIR" $MANTIS_URL/$MANTIS_GIT_ENDPOINT)
+    $CURL --silent --data-urlencode "commit=$commit" --data-urlencode "message=$message" --data-urlencode "committer=$committer" --data-urlencode "dir=$GIT_DIR" $MANTIS_URL/$MANTIS_GIT_ENDPOINT
 
     #Log management
     echo "$TIMEPOINT ----------------------------------" >>$LOG_FILE
