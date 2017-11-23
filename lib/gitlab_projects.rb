@@ -55,7 +55,7 @@ class GitlabProjects
          $logger.info "Hook #{hook_conf['id']} not enable by default"
       end
     end
-
+    $logger.info "... Hooks has been imported"
   end
 
   def initialize
