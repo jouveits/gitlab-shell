@@ -56,6 +56,7 @@ class GitlabProjects
       end
     end
     $logger.info "... Hooks has been imported"
+    true
   end
 
   def initialize
