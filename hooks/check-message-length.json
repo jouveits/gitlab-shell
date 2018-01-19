@@ -3,6 +3,6 @@
   "description": "Commit message must have at least 10 characters.",
   "type": "pre-receive",
   "enable_default": true,
-  "locked": true,
+  "locked": false,
   "version": "0.0.1"
 }
